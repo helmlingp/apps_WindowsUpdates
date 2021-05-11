@@ -1,6 +1,6 @@
 <#	
   .Synopsis
-    Uninstall or Install Windows Update Quality Update (KB)
+    Install or Uninstall Windows Update Quality Update (KB)
   .NOTES
 	Created:   	    May, 2021
     Created by:     Grischa Ernst, 
