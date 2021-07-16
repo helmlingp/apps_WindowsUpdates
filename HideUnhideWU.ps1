@@ -1,6 +1,6 @@
 <#	
   .Synopsis
-    Uninstall/Hide or Install/Unhide Windows Update Quality Update (KB)
+    Hide or Unhide Windows Update Quality Update (KB)
   .NOTES
 	Created:   	    March, 2021
     Created by:     Grischa Ernst, 

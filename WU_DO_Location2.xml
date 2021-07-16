@@ -1,5 +1,5 @@
 <Replace>
-  <CmdID>140</CmdID>
+  <CmdID>10</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DODownloadMode</LocURI>
@@ -12,7 +12,7 @@
   </Item>
 </Replace>
 <Replace>
-  <CmdID>150</CmdID>
+  <CmdID>20</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOMaxCacheAge</LocURI>
@@ -25,7 +25,7 @@
   </Item>
 </Replace>
 <Replace>
-  <CmdID>160</CmdID>
+  <CmdID>30</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOMinFileSizeToCache</LocURI>
@@ -38,7 +38,7 @@
   </Item>
 </Replace>
 <Replace>
-  <CmdID>170</CmdID>
+  <CmdID>40</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DODelayBackgroundDownloadFromHttp</LocURI>
@@ -51,7 +51,7 @@
   </Item>
 </Replace>
 <Replace>
-  <CmdID>180</CmdID>
+  <CmdID>50</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DODelayForegroundDownloadFromHttp</LocURI>
@@ -60,11 +60,11 @@
       <Format xmlns="syncml:metinf">int</Format>
       <Type>text/plain</Type>
     </Meta>
-    <Data>60</Data>
+    <Data>600</Data>
   </Item>
 </Replace>
 <Replace>
-  <CmdID>190</CmdID>
+  <CmdID>60</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOMinBackgroundQoS</LocURI>
@@ -77,7 +77,7 @@
   </Item>
 </Replace>
 <Replace>
-  <CmdID>200</CmdID>
+  <CmdID>70</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOGroupId</LocURI>
@@ -86,13 +86,13 @@
       <Format xmlns="syncml:metinf">chr</Format>
       <Type>text/plain</Type>
     </Meta>
-    <Data>3c490952-9809-4a9e-9877-0afaed519dee</Data>
+    <Data>706cb725-88a4-46da-8ae6-37f101c4d158</Data>
   </Item>
 </Replace>
 
 
 <Delete>
-  <CmdID>140</CmdID>
+  <CmdID>10</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DODownloadMode</LocURI>
@@ -105,7 +105,7 @@
   </Item>
 </Delete>
 <Delete>
-  <CmdID>150</CmdID>
+  <CmdID>20</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOMaxCacheAge</LocURI>
@@ -118,7 +118,7 @@
   </Item>
 </Delete>
 <Delete>
-  <CmdID>160</CmdID>
+  <CmdID>30</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOMinFileSizeToCache</LocURI>
@@ -131,7 +131,7 @@
   </Item>
 </Delete>
 <Delete>
-  <CmdID>170</CmdID>
+  <CmdID>40</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DODelayBackgroundDownloadFromHttp</LocURI>
@@ -144,7 +144,7 @@
   </Item>
 </Delete>
 <Delete>
-  <CmdID>180</CmdID>
+  <CmdID>50</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DODelayForegroundDownloadFromHttp</LocURI>
@@ -157,7 +157,7 @@
   </Item>
 </Delete>
 <Delete>
-  <CmdID>190</CmdID>
+  <CmdID>60</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOMinBackgroundQoS</LocURI>
@@ -170,7 +170,7 @@
   </Item>
 </Delete>
 <Delete>
-  <CmdID>200</CmdID>
+  <CmdID>70</CmdID>
   <Item>
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/DeliveryOptimization/DOGroupId</LocURI>
