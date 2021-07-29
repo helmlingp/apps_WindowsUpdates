@@ -14,19 +14,24 @@
     Uses https://www.powershellgallery.com/packages/PSWindowsUpdate Module which is automatically installed
     
   .EXAMPLE
-    Install a KB
-    powershell.exe -ep bypass -file .\InstallUninstallWU.ps1 -InstallKBs KB897894
+    Install a specific KB & Reboot automatically if needed
+    powershell.exe -ep bypass -file .\InstallUninstallWU.ps1 -InstallKBs KB897894 -Reboot
 
-    Uninstall a KB
+    Uninstall a specific KB & do not reboot
     powershell.exe -ep bypass -file .\InstallUninstallWU.ps1 -UnInstallKBs KB897894
+
+    Install all available updates and reboot if needed
+    powershell.exe -ep bypass -file .\InstallUninstallWU.ps1 -InstallAvailable -Reboot
 #>
 
 
 param (
-[Parameter(ValueFromRemainingArguments=$true)]
+    [Parameter(ValueFromRemainingArguments=$true)]
     [string[]]$InstallKBs=$script:InstallKBs,
     [Parameter(ValueFromRemainingArguments=$true)]
-    [string[]]$UnInstallKBs=$script:UnInstallKBs
+    [string[]]$UnInstallKBs=$script:UnInstallKBs,
+    [switch] $InstallAvailable,
+    [Switch] $Reboot
 )
 Try { Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction Stop } Catch {}
  
@@ -57,10 +62,28 @@ Import-Module -Name "PSwindowsUpdate"
 
 if($InstallKBs){
     #Call PSWindowsUpdate module
-    Get-WindowsUpdate -KBArticleID $InstallKBs -Install -AcceptAll -AutoReboot
+    if($Reboot){
+        Get-WindowsUpdate -KBArticleID $InstallKBs -Install -AcceptAll -AutoReboot
+    } else {
+        Get-WindowsUpdate -KBArticleID $InstallKBs -Install -AcceptAll -IgnoreReboot
+    }
 }
 
 if($UnInstallKBs){
     #Call PSWindowsUpdate module
-    Remove-WindowsUpdate -KBArticleID $UnInstallKBs -AcceptAll -NoRestart -WUSAMode
+    if($Reboot){
+        Remove-WindowsUpdate -KBArticleID $UnInstallKBs -AcceptAll -AutoReboot -WUSAMode
+    } else {
+        Remove-WindowsUpdate -KBArticleID $UnInstallKBs -AcceptAll -IgnoreReboot -WUSAMode
+    }
+}
+
+if($InstallAvailable){
+    #Call PSWindowsUpdate module
+    if($Reboot){
+        Get-WindowsUpdate -Install -AcceptAll -AutoReboot
+    } else {
+        Get-WindowsUpdate -Install -AcceptAll -IgnoreReboot
+    }
+    
 }
