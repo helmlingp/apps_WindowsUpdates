@@ -9,7 +9,7 @@
     GitHub:         https://github.com/helmlingp/apps_WindowsUpdates
 .DESCRIPTION
     Used to test if a KB is hidden or not. Used in conjunction with HideUnhideWU.ps1 in same repo for "When to Call Install Complete" logic.
-
+    *** Hide KB
     When to Call Install Complete:
         Identify Application By: Using Custom Script
         Script Type: Powershell
@@ -35,7 +35,7 @@ $NuGetInstalled = $false
 foreach ($item in $PackageProvider.name){
     if($item -eq "NuGet")
     {
-        $NuGetInstalled = $tru
+        $NuGetInstalled = $true
     }
 }
 if($NuGetInstalled = $false){

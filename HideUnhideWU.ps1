@@ -50,7 +50,7 @@
 #>
 
 param (
-[Parameter(ValueFromRemainingArguments=$true)]
+    [Parameter(ValueFromRemainingArguments=$true)]
     [string[]]$HideKBs=$script:HideKBs,
     [Parameter(ValueFromRemainingArguments=$true)]
     [string[]]$UnhideKBs=$script:UnhideKBs
@@ -63,7 +63,7 @@ $NuGetInstalled = $false
 foreach ($item in $PackageProvider.name){
     if($item -eq "NuGet")
     {
-        $NuGetInstalled = $tru
+        $NuGetInstalled = $true
     }
 }
 if($NuGetInstalled = $false){
