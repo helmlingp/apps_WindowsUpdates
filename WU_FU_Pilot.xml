@@ -1,5 +1,5 @@
 <Replace>
-  <CmdID>1</CmdID>
+  <CmdID>262a5fdb-8d1a-4dd9-84c0-2ec2f3308b33</CmdID>
   <Item>
     <Target>
       <LocURI>./Vendor/MSFT/Policy/Config/Update/TargetReleaseVersion</LocURI>
@@ -10,12 +10,36 @@
     <Data>21H1</Data>
   </Item>
 </Replace>
+<Replace>
+  <CmdID>8a4ef368-d18a-4781-8ff9-f8ca030c3250</CmdID>
+  <Item>
+    <Target>
+      <LocURI>./Vendor/MSFT/Policy/Config/Update/ProductVersion</LocURI>
+    </Target>
+    <Meta>
+      <Format xmlns="syncml:metinf">chr</Format>
+    </Meta>
+    <Data>Windows 11</Data>
+  </Item>
+</Replace>
 
 <Delete>
-  <CmdID>1</CmdID>
+  <CmdID>262a5fdb-8d1a-4dd9-84c0-2ec2f3308b33</CmdID>
   <Item>
     <Target>
       <LocURI>./Vendor/MSFT/Policy/Config/Update/TargetReleaseVersion</LocURI>
+    </Target>
+    <Meta>
+      <Format xmlns="syncml:metinf">chr</Format>
+    </Meta>
+    <Data></Data>
+  </Item>
+</Delete>
+<Delete>
+  <CmdID>8a4ef368-d18a-4781-8ff9-f8ca030c3250</CmdID>
+  <Item>
+    <Target>
+      <LocURI>./Vendor/MSFT/Policy/Config/Update/ProductVersion</LocURI>
     </Target>
     <Meta>
       <Format xmlns="syncml:metinf">chr</Format>
