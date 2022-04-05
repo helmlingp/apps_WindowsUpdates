@@ -193,11 +193,11 @@ if($UnInstallKBs){
 		#Try removal approach 4 - use DISM
 		if(!$ec -or $ec -eq 4){
 			write-host "Trying DISM to uninstall update $unInstallKB"
-			$currentbuild = (Get-ItemProperty	"Registry::HKLM\Software\Microsoft\Windows NT\CurrentVersion").currentbuild
-			$ubr = (Get-ItemProperty	"Registry::HKLM\Software\Microsoft\Windows NT\CurrentVersion").ubr
-			$osbuild = "$currentbuild.$ubr"
+			#$currentbuild = (Get-ItemProperty	"Registry::HKLM\Software\Microsoft\Windows NT\CurrentVersion").currentbuild
+			#$ubr = (Get-ItemProperty	"Registry::HKLM\Software\Microsoft\Windows NT\CurrentVersion").ubr
+			#$osbuild = "$currentbuild.$ubr"
 			$searchupdates = dism.exe /online /Get-Packages | findstr "Package_for"
-			$updates = $searchupdates -match $unInstallKB -replace "Package Identity : "
+			$updates = $searchupdates -match "$unInstallKB" -replace "Package Identity : "
 			$dismpinfo = New-Object System.Diagnostics.ProcessStartInfo
 			$dismpinfo.FileName = "DISM.exe"
 			$dismpinfo.RedirectStandardError = $true
