@@ -1,0 +1,1672 @@
+{
+    "name": "Windows Update",
+    "widgets": [
+        {
+            "name": "Windows Devices by OS Version",
+            "description": "Count of Windows devices grouped by OS Version",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device._device_platform = 'Windows Desktop' AND airwatch.device.device_enrollment_status IN ( 'Enrolled' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 100,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "operand_collection_present": false,
+                    "logical_operator": "AND",
+                    "lhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.device._device_platform",
+                        "operator": "=",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Windows Desktop"
+                            }
+                        ],
+                        "operand_collection_present": false
+                    },
+                    "rhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.device.device_enrollment_status",
+                        "operator": "IN",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Enrolled"
+                            }
+                        ],
+                        "operand_collection_present": true
+                    }
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "logical_operator": "AND",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device._device_platform",
+                            "operator": "=",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Windows Desktop"
+                                }
+                            ],
+                            "operand_collection_present": false
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_enrollment_status",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Enrolled"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 0,
+                "column_number": 0
+            },
+            "bottom_right": {
+                "row_number": 2,
+                "column_number": 4
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Device Update Detailed Status",
+            "description": "Overall WU Status of all devices",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.devicesensors._ca_wu_status"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.devicesensors.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "entities_by_integration": {
+                    "airwatch": [
+                        "devicesensors"
+                    ]
+                },
+                "cardinality": 100,
+                "accumulate": false,
+                "ignore_case": false,
+                "all_report_column_attributes": [
+                    "airwatch.devicesensors.device_guid",
+                    "airwatch.devicesensors._ca_wu_status"
+                ]
+            },
+            "top_left": {
+                "row_number": 0,
+                "column_number": 8
+            },
+            "bottom_right": {
+                "row_number": 2,
+                "column_number": 12
+            },
+            "chart_type": "TABLE",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in FU Ring 2",
+            "description": "Create a widget from scratch",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ANY OF ( 'Ring2' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ANY OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Ring2"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ANY OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Ring2"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 3,
+                "column_number": 4
+            },
+            "bottom_right": {
+                "row_number": 4,
+                "column_number": 6
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in QU Ring 2",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ALL OF ( 'Ring2' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ALL OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Ring2"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ALL OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Ring2"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 2,
+                "column_number": 4
+            },
+            "bottom_right": {
+                "row_number": 3,
+                "column_number": 6
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Updates Released within 28 Days",
+            "trend_definition": {
+                "trend_mode": "HISTORICAL",
+                "date_range": {
+                    "trend_span": {
+                        "duration": 28,
+                        "unit": "DAYS"
+                    },
+                    "sampling_frequency": {
+                        "duration": 1,
+                        "unit": "DAYS"
+                    },
+                    "start_date_millis": 0,
+                    "end_date_millis": 0,
+                    "date_attribute_name": "airwatch.windowspatch.adp_modified_at",
+                    "date_range_order": "DESC"
+                },
+                "bucketing_attributes": [
+                    "airwatch.windowspatch.winpatch_update_classification"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.windowspatch.winpatch_kb_number",
+                        "aggregation_function": "COUNT_DISTINCT"
+                    }
+                ],
+                "filter": "airwatch.windowspatch.device_enrollment_status = 'Enrolled'  AND  airwatch.windowspatch.winpatch_publish_date WITHIN 28 days",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "windowspatch"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "operand_collection_present": false,
+                    "logical_operator": "AND",
+                    "lhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.windowspatch.device_enrollment_status",
+                        "operator": "=",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Enrolled"
+                            }
+                        ],
+                        "operand_collection_present": false
+                    },
+                    "rhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.windowspatch.winpatch_publish_date",
+                        "operator": "WITHIN",
+                        "operands": [
+                            {
+                                "operand_type": "DateTimeOperand",
+                                "operator": "MINUS",
+                                "interval": 28,
+                                "unit": "DAYS",
+                                "instant": "2022-06-23T10:57:50.931816Z",
+                                "data_type": "LONG"
+                            },
+                            {
+                                "operand_type": "DateTimeOperand",
+                                "operator": "MINUS",
+                                "interval": 0,
+                                "unit": "SECONDS",
+                                "instant": "2022-06-23T10:57:50.931817Z",
+                                "data_type": "LONG"
+                            }
+                        ],
+                        "operand_collection_present": false
+                    }
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "logical_operator": "AND",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.device_enrollment_status",
+                            "operator": "=",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Enrolled"
+                                }
+                            ],
+                            "operand_collection_present": false
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_publish_date",
+                            "operator": "WITHIN",
+                            "operands": [
+                                {
+                                    "operand_type": "DateTimeOperand",
+                                    "operator": "MINUS",
+                                    "interval": 28,
+                                    "unit": "DAYS",
+                                    "instant": "2022-06-23T10:57:50.931880Z",
+                                    "data_type": "LONG"
+                                }
+                            ],
+                            "operand_collection_present": false
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.windowspatch.winpatch_kb_number",
+                    "airwatch.windowspatch.winpatch_update_classification"
+                ]
+            },
+            "top_left": {
+                "row_number": 6,
+                "column_number": 0
+            },
+            "bottom_right": {
+                "row_number": 8,
+                "column_number": 4
+            },
+            "chart_type": "TABLE",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Critical Security and Definition Updates Needed",
+            "description": "% of Critical Security and Definition updates available to install",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.windowspatch.winpatch_update_classification",
+                    "airwatch.windowspatch.winpatch_update_status"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.windowspatch.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.windowspatch.winpatch_update_status IN ( 'Available' , 'Failed' , 'Pending Install' )  AND  airwatch.windowspatch.winpatch_update_classification IN ( 'CriticalUpdates' , 'SecurityUpdates' , 'DefinitionUpdates' )  AND  airwatch.windowspatch.device_enrollment_status = 'Enrolled'",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "windowspatch"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "operand_collection_present": false,
+                    "logical_operator": "AND",
+                    "lhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "operand_collection_present": false,
+                        "logical_operator": "AND",
+                        "lhs": {
+                            "parenthesized": false,
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_status",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Available"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Failed"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Pending Install"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        },
+                        "rhs": {
+                            "parenthesized": false,
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_classification",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "CriticalUpdates"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "SecurityUpdates"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "DefinitionUpdates"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    },
+                    "rhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.windowspatch.device_enrollment_status",
+                        "operator": "=",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Enrolled"
+                            }
+                        ],
+                        "operand_collection_present": false
+                    }
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "logical_operator": "AND",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_status",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Available"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Failed"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Pending Install"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_classification",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "CriticalUpdates"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "SecurityUpdates"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "DefinitionUpdates"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.device_enrollment_status",
+                            "operator": "=",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Enrolled"
+                                }
+                            ],
+                            "operand_collection_present": false
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.windowspatch.device_guid",
+                    "airwatch.windowspatch.winpatch_update_status",
+                    "airwatch.windowspatch.winpatch_update_classification"
+                ]
+            },
+            "top_left": {
+                "row_number": 8,
+                "column_number": 0
+            },
+            "bottom_right": {
+                "row_number": 10,
+                "column_number": 7
+            },
+            "chart_type": "TREE_MAP",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "QU Released within 60 Days Install Status",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.windowspatch.winpatch_update_status"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.windowspatch.winpatch_kb_number",
+                        "aggregation_function": "COUNT_DISTINCT"
+                    }
+                ],
+                "filter": "airwatch.windowspatch.device_enrollment_status = 'Enrolled'  AND  airwatch.windowspatch.winpatch_publish_date WITHIN 60 days  AND  airwatch.windowspatch.winpatch_update_status NOT IN ( 'Removed' , 'Unknown' )  AND  airwatch.windowspatch.winpatch_update_classification NOT IN ( 'FeatureUpdates' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "windowspatch"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "operand_collection_present": false,
+                    "logical_operator": "AND",
+                    "lhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "operand_collection_present": false,
+                        "logical_operator": "AND",
+                        "lhs": {
+                            "parenthesized": false,
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "operand_collection_present": false,
+                            "logical_operator": "AND",
+                            "lhs": {
+                                "parenthesized": false,
+                                "nested_attribute": false,
+                                "custom_attribute": false,
+                                "attribute": "airwatch.windowspatch.device_enrollment_status",
+                                "operator": "=",
+                                "operands": [
+                                    {
+                                        "operand_type": "BasicOperand",
+                                        "data_type": "STRING",
+                                        "value": "Enrolled"
+                                    }
+                                ],
+                                "operand_collection_present": false
+                            },
+                            "rhs": {
+                                "parenthesized": false,
+                                "nested_attribute": false,
+                                "custom_attribute": false,
+                                "attribute": "airwatch.windowspatch.winpatch_publish_date",
+                                "operator": "WITHIN",
+                                "operands": [
+                                    {
+                                        "operand_type": "DateTimeOperand",
+                                        "operator": "MINUS",
+                                        "interval": 60,
+                                        "unit": "DAYS",
+                                        "instant": "2022-06-23T10:57:50.932273Z",
+                                        "data_type": "LONG"
+                                    },
+                                    {
+                                        "operand_type": "DateTimeOperand",
+                                        "operator": "MINUS",
+                                        "interval": 0,
+                                        "unit": "SECONDS",
+                                        "instant": "2022-06-23T10:57:50.932273Z",
+                                        "data_type": "LONG"
+                                    }
+                                ],
+                                "operand_collection_present": false
+                            }
+                        },
+                        "rhs": {
+                            "parenthesized": false,
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_status",
+                            "operator": "NOT IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Removed"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Unknown"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    },
+                    "rhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.windowspatch.winpatch_update_classification",
+                        "operator": "NOT IN",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "FeatureUpdates"
+                            }
+                        ],
+                        "operand_collection_present": true
+                    }
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "logical_operator": "AND",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.device_enrollment_status",
+                            "operator": "=",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Enrolled"
+                                }
+                            ],
+                            "operand_collection_present": false
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_publish_date",
+                            "operator": "WITHIN",
+                            "operands": [
+                                {
+                                    "operand_type": "DateTimeOperand",
+                                    "operator": "MINUS",
+                                    "interval": 60,
+                                    "unit": "DAYS",
+                                    "instant": "2022-06-23T10:57:50.932358Z",
+                                    "data_type": "LONG"
+                                }
+                            ],
+                            "operand_collection_present": false
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_status",
+                            "operator": "NOT IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Removed"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Unknown"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_classification",
+                            "operator": "NOT IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "FeatureUpdates"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.windowspatch.winpatch_kb_number",
+                    "airwatch.windowspatch.winpatch_update_status"
+                ]
+            },
+            "top_left": {
+                "row_number": 8,
+                "column_number": 7
+            },
+            "bottom_right": {
+                "row_number": 10,
+                "column_number": 12
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in QU Ring 1",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ALL OF ( 'Ring1' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ALL OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Ring1"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ALL OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Ring1"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 3,
+                "column_number": 2
+            },
+            "bottom_right": {
+                "row_number": 4,
+                "column_number": 4
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in FU Ring 1",
+            "description": "Create a widget from scratch",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ANY OF ( 'Ring1' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ANY OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Ring1"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ANY OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Ring1"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 2,
+                "column_number": 2
+            },
+            "bottom_right": {
+                "row_number": 3,
+                "column_number": 4
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in FU Pilot",
+            "description": "Create a widget from scratch",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ANY OF ( 'Pilot' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ANY OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Pilot"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ANY OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Pilot"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 2,
+                "column_number": 0
+            },
+            "bottom_right": {
+                "row_number": 3,
+                "column_number": 2
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Windows Patch Updates Status",
+            "description": "OS Update Status Breakdown for Updates Across All Devices",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.windowspatch.winpatch_update_status",
+                    "airwatch.windowspatch.winpatch_update_classification"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.windowspatch.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.windowspatch.winpatch_update_status NOT IN ( 'Removed' , 'Unknown' )  AND  airwatch.windowspatch.device_enrollment_status IN ( 'Enrolled' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "windowspatch"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "operand_collection_present": false,
+                    "logical_operator": "AND",
+                    "lhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.windowspatch.winpatch_update_status",
+                        "operator": "NOT IN",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Removed"
+                            },
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Unknown"
+                            }
+                        ],
+                        "operand_collection_present": true
+                    },
+                    "rhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.windowspatch.device_enrollment_status",
+                        "operator": "IN",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Enrolled"
+                            }
+                        ],
+                        "operand_collection_present": true
+                    }
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "logical_operator": "AND",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.winpatch_update_status",
+                            "operator": "NOT IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Removed"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Unknown"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.windowspatch.device_enrollment_status",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Enrolled"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.windowspatch.device_guid",
+                    "airwatch.windowspatch.winpatch_update_status",
+                    "airwatch.windowspatch.winpatch_update_classification"
+                ]
+            },
+            "top_left": {
+                "row_number": 6,
+                "column_number": 4
+            },
+            "bottom_right": {
+                "row_number": 8,
+                "column_number": 12
+            },
+            "chart_type": "VERTICAL",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Device Update Detail Status",
+            "description": "Overall WU status of all devices",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.devicesensors._ca_wu_status"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.devicesensors.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "entities_by_integration": {
+                    "airwatch": [
+                        "devicesensors"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "all_report_column_attributes": [
+                    "airwatch.devicesensors.device_guid",
+                    "airwatch.devicesensors._ca_wu_status"
+                ]
+            },
+            "top_left": {
+                "row_number": 0,
+                "column_number": 4
+            },
+            "bottom_right": {
+                "row_number": 2,
+                "column_number": 8
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in QU Pilot",
+            "description": "Create a widget from scratch",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ANY OF ( 'Pilot' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ANY OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Pilot"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ANY OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Pilot"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 3,
+                "column_number": 0
+            },
+            "bottom_right": {
+                "row_number": 4,
+                "column_number": 2
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in QU Ring 3",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ALL OF ( 'Ring3' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ALL OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Ring3"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ALL OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Ring3"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 2,
+                "column_number": 6
+            },
+            "bottom_right": {
+                "row_number": 3,
+                "column_number": 8
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Device Update Summary Status",
+            "description": "Create a widget from scratch",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.devicesensors._ca_wu_status"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.devicesensors.device_guid",
+                        "aggregation_function": "COUNT_DISTINCT"
+                    }
+                ],
+                "filter": "airwatch.devicesensors._ca_wu_status IN ( 'Up-to-Date' , 'Out-of-Date' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "devicesensors"
+                    ]
+                },
+                "cardinality": 100,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": true,
+                    "attribute": "airwatch.devicesensors._ca_wu_status",
+                    "operator": "IN",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Up-to-Date"
+                        },
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Out-of-Date"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": true,
+                            "attribute": "airwatch.devicesensors._ca_wu_status",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Up-to-Date"
+                                },
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Out-of-Date"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.devicesensors.device_guid",
+                    "airwatch.devicesensors._ca_wu_status"
+                ]
+            },
+            "top_left": {
+                "row_number": 2,
+                "column_number": 8
+            },
+            "bottom_right": {
+                "row_number": 4,
+                "column_number": 12
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Devices in FU Ring 3",
+            "description": "Create a widget from scratch",
+            "trend_definition": {
+                "trend_mode": "SNAPSHOT",
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT"
+                    }
+                ],
+                "filter": "airwatch.device.device_tag_name_list CONTAINS ANY OF ( 'Ring3' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 10,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "attribute": "airwatch.device.device_tag_name_list",
+                    "operator": "CONTAINS ANY OF",
+                    "operands": [
+                        {
+                            "operand_type": "BasicOperand",
+                            "data_type": "STRING",
+                            "value": "Ring3"
+                        }
+                    ],
+                    "operand_collection_present": true
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_tag_name_list",
+                            "operator": "CONTAINS ANY OF",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Ring3"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 3,
+                "column_number": 6
+            },
+            "bottom_right": {
+                "row_number": 4,
+                "column_number": 8
+            },
+            "chart_type": "DONUT",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        },
+        {
+            "name": "Win10 OS Timeline",
+            "trend_definition": {
+                "trend_mode": "HISTORICAL",
+                "date_range": {
+                    "trend_span": {
+                        "duration": 28,
+                        "unit": "DAYS"
+                    },
+                    "sampling_frequency": {
+                        "duration": 1,
+                        "unit": "DAYS"
+                    },
+                    "start_date_millis": 0,
+                    "end_date_millis": 0,
+                    "date_attribute_name": "airwatch.device.adp_modified_at",
+                    "date_range_order": "DESC"
+                },
+                "bucketing_attributes": [
+                    "airwatch.device.device_os_version_build"
+                ],
+                "counter_definitions": [
+                    {
+                        "aggregate_attribute": "airwatch.device.device_guid",
+                        "aggregation_function": "COUNT_DISTINCT"
+                    }
+                ],
+                "filter": "airwatch.device.device_enrollment_status IN ( 'Enrolled' )  AND  airwatch.device.device_platform IN ( 'WinRT' )",
+                "entities_by_integration": {
+                    "airwatch": [
+                        "device"
+                    ]
+                },
+                "cardinality": 100,
+                "accumulate": false,
+                "ignore_case": false,
+                "filter_condition": {
+                    "parenthesized": false,
+                    "nested_attribute": false,
+                    "custom_attribute": false,
+                    "operand_collection_present": false,
+                    "logical_operator": "AND",
+                    "lhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.device.device_enrollment_status",
+                        "operator": "IN",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "Enrolled"
+                            }
+                        ],
+                        "operand_collection_present": true
+                    },
+                    "rhs": {
+                        "parenthesized": false,
+                        "nested_attribute": false,
+                        "custom_attribute": false,
+                        "attribute": "airwatch.device.device_platform",
+                        "operator": "IN",
+                        "operands": [
+                            {
+                                "operand_type": "BasicOperand",
+                                "data_type": "STRING",
+                                "value": "WinRT"
+                            }
+                        ],
+                        "operand_collection_present": true
+                    }
+                },
+                "filter_condition_nested_rules": {
+                    "type": "RuleSet",
+                    "logical_operator": "AND",
+                    "rules": [
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_enrollment_status",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "Enrolled"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        },
+                        {
+                            "type": "Rule",
+                            "nested_attribute": false,
+                            "custom_attribute": false,
+                            "attribute": "airwatch.device.device_platform",
+                            "operator": "IN",
+                            "operands": [
+                                {
+                                    "operand_type": "BasicOperand",
+                                    "data_type": "STRING",
+                                    "value": "WinRT"
+                                }
+                            ],
+                            "operand_collection_present": true
+                        }
+                    ]
+                },
+                "all_report_column_attributes": [
+                    "airwatch.device.device_guid",
+                    "airwatch.device.device_os_version_build"
+                ]
+            },
+            "top_left": {
+                "row_number": 4,
+                "column_number": 0
+            },
+            "bottom_right": {
+                "row_number": 6,
+                "column_number": 12
+            },
+            "chart_type": "LINE",
+            "enabled": true,
+            "included_in_default_dashboard": false
+        }
+    ],
+    "created_at": "2021-05-20T04:34:29.620Z"
+}
