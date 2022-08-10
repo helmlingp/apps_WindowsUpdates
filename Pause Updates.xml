@@ -21,7 +21,7 @@
       <Format xmlns="syncml:metinf">chr</Format>
       <Type>text/plain</Type>
     </Meta>
-    <Data>2021-07-01</Data>
+    <Data>YYYY-MM-DD</Data>
   </Item>
 </Replace>
 
