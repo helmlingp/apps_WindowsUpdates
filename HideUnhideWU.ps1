@@ -13,7 +13,9 @@
     Helps with incompatible updates such as drivers and can be used instead of GUI tool:
     https://support.microsoft.com/en-us/windows/hide-windows-updates-or-driver-updates-5df410a1-90f7-b744-0682-43be9c8fa17c
 
-    Uses https://www.powershellgallery.com/packages/PSWindowsUpdate Module which is automatically installed
+    Uses https://www.powershellgallery.com/packages/PSWindowsUpdate Module which is automatically installed.
+
+    Works as self-contained script accepting parameters or using environment variables provided by Workspace ONE Scripts.
 
     Workspace ONE Application Parameters
     *** Hide KB
@@ -51,36 +53,36 @@
 
 param (
     [Parameter(ValueFromRemainingArguments=$true)]
-    [string[]]$HideKBs=$script:HideKBs,
+    [string[]]$HideKBs=$HideKBs,
     [Parameter(ValueFromRemainingArguments=$true)]
-    [string[]]$UnhideKBs=$script:UnhideKBs
+    [string[]]$UnhideKBs=$UnhideKBs
 )
-Try { Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction Stop } Catch {}
- 
-$PackageProvider = Get-PackageProvider -ListAvailable
-$NuGetInstalled = $false
- 
-foreach ($item in $PackageProvider.name){
-    if($item -eq "NuGet")
-    {
-        $NuGetInstalled = $true
-    }
-}
-if($NuGetInstalled = $false){
-    Install-PackageProvider NuGet -Force
-}else{
-    Get-PackageProvider -Name NuGet -Force
-    Write-Output "NuGet is already installed"
+
+if ($HideKBs) {}else{$HideKBs=$env:HideKBs}
+if ($UnhideKBs) {}else{$UnhideKBs=$env:UnhideKBs}
+
+# First, check if the final goal—the module—is already installed.
+if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
+    
+    Write-Host "PSWindowsUpdate module not found. Beginning installation process..."
+
+    # --- Prerequisite Check: NuGet Provider ---
+    # This check only runs if the module needs to be installed.
+    if (-not (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
+        Write-Host "Prerequisite 'NuGet' is missing. Installing NuGet provider..."
+        Install-PackageProvider -Name NuGet -Force
     }
 
-$ModuleInstalled = Get-Module PSWindowsUpdate
-if(!$ModuleInstalled){
-    Install-Module -Name PSWindowsUpdate -Force
-}else{
-    Write-Output "PSWindowsUpdate Module is already installed"
-    }
- 
-Import-Module -Name "PSwindowsUpdate" -MinimumVersion 2.2.0.2
+    # --- Module Installation ---
+    # Now that the prerequisite is confirmed, install the main module.
+    Write-Host "Installing PSWindowsUpdate module..."
+    Install-Module -Name PSWindowsUpdate -Force -Scope CurrentUser
+}
+
+# --- Import Module ---
+# This line runs regardless, ensuring the module is loaded into the current session.
+Import-Module -Name PSWindowsUpdate -MinimumVersion 2.2.0.2
+Write-Host "PSWindowsUpdate module is ready to use."
 
 if($HideKBs){
     #Call PSWindowsUpdate module

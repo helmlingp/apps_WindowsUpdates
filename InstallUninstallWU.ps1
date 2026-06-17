@@ -1,6 +1,6 @@
 <#	
   .Synopsis
-    Install or Uninstall Windows Quality Update (KB)
+    Install or Uninstall Windows Quality Update KBs from WUfB
   .NOTES
 		Created:       May, 2021
 		Created by:     Grischa Ernst, 
@@ -8,9 +8,11 @@
 		Organization:   VMware, Inc.
 		Filename:       InstallUninstallWU.ps1
 	.DESCRIPTION
-    Installs or Uninstalls a Windows Quality Update KB, does not wait for WU Schedule.
+    Installs or Uninstalls a Windows Quality Update KBs from Windows Update for Business, does not wait for WU deferral policy schedule or maintenance window.
     Helps with deploying Zero Day/Urgent Patches.
 		Also can install all available KBs using -InstallAvailable switch
+
+		Works as self-contained script accepting parameters or using environment variables provided by Workspace ONE Scripts.
 
 		Uninstalling updates tries 4 methods in the following order:
 		1. PSWindowsUpdate module using Remove-WindowsUpdate. Uses https://www.powershellgallery.com/packages/PSWindowsUpdate Module which is automatically installed
@@ -60,12 +62,17 @@
 
 param (
     [Parameter(ValueFromRemainingArguments=$true)]
-    [string[]]$InstallKBs=$script:InstallKBs,
+    [string[]]$InstallKBs=$InstallKBs,
     [Parameter(ValueFromRemainingArguments=$true)]
-    [string[]]$UnInstallKBs=$script:UnInstallKBs,
+    [string[]]$UnInstallKBs=$UnInstallKBs,
     [switch] $InstallAvailable,
     [Switch] $Reboot
 )
+
+if ($InstallKBs) {}else{$InstallKBs=$env:InstallKBs}
+if ($UnInstallKBs) {}else{$UnInstallKBs=$env:UnInstallKBs}
+if ($InstallAvailable) {}else{$InstallAvailable=$env:InstallAvailable}
+if ($Reboot) {}else{$Reboot=$env:Reboot}
 
 Function WriteRegKey {
 	Param (
@@ -81,31 +88,28 @@ Function WriteRegKey {
 	New-ItemProperty $key -Name $name -Type $type -Value $value -ErrorAction SilentlyContinue -Force;
 }
 
-Try { Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force -ErrorAction Stop } Catch {}
- 
-$PackageProvider = Get-PackageProvider -ListAvailable
-$NuGetInstalled = $false
- 
-foreach ($item in $PackageProvider.name){
-	if($item -eq "NuGet")
-	{
-		$NuGetInstalled = $true
-	}
-}
-if($NuGetInstalled = $false){
-	Install-PackageProvider NuGet -Force
-}else{
-	Get-PackageProvider -Name NuGet -Force
-	Write-Output "NuGet is already installed"
-	}
+# First, check if the final goal—the module—is already installed.
+if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
+    
+    Write-Host "PSWindowsUpdate module not found. Beginning installation process..."
 
-$ModuleInstalled = Get-Module PSWindowsUpdate
-if(!$ModuleInstalled){
-	Install-Module -Name PSWindowsUpdate -Force
-}else{
-	Write-Output "PSWindowsUpdate Module is already installed"
-	}
-Import-Module -Name "PSwindowsUpdate" -MinimumVersion 2.2.0.2
+    # --- Prerequisite Check: NuGet Provider ---
+    # This check only runs if the module needs to be installed.
+    if (-not (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
+        Write-Host "Prerequisite 'NuGet' is missing. Installing NuGet provider..."
+        Install-PackageProvider -Name NuGet -Force
+    }
+
+    # --- Module Installation ---
+    # Now that the prerequisite is confirmed, install the main module.
+    Write-Host "Installing PSWindowsUpdate module..."
+    Install-Module -Name PSWindowsUpdate -Force
+}
+
+# --- Import Module ---
+# This line runs regardless, ensuring the module is loaded into the current session.
+Import-Module -Name PSWindowsUpdate -MinimumVersion 2.2.0.2
+Write-Host "PSWindowsUpdate module is ready to use."
 
 $ec = ""
 if($InstallKBs){
@@ -116,7 +120,7 @@ if($InstallKBs){
 				$name = "Install $InstallKB"
 				$isinstalled = Get-WUHistory -last 30 | Where-Object {$_.KB -eq $installKB}
 				$ec = $isinstalled.ResultCode
-				WriteRegKey -name $name -type "DWORD" -value $ec
+				#WriteRegKey -name $name -type "DWORD" -value $ec
 			}
     } else {
 			foreach ($InstallKB in $InstallKBs){
@@ -124,7 +128,7 @@ if($InstallKBs){
 				$name = "Install $InstallKB"
 				$isinstalled = Get-WUHistory -last 30 | Where-Object {$_.KB -eq $installKB}
 				$ec = $isinstalled.ResultCode
-				WriteRegKey -name $name -type "DWORD" -value $ec
+				#WriteRegKey -name $name -type "DWORD" -value $ec
 			}
     }
 }
@@ -214,7 +218,7 @@ if($UnInstallKBs){
 		}
 		if(!$ec){$ec = 404}
 		$name = "Uninstall $UnInstallKB"
-		WriteRegKey -name $name -type "DWORD" -value $ec
+		#WriteRegKey -name $name -type "DWORD" -value $ec
 	}
 	if($Reboot){
 		Restart-Computer
@@ -224,18 +228,18 @@ if($UnInstallKBs){
 if($InstallAvailable){
     #Call PSWindowsUpdate module
     if($Reboot){
-        Get-WindowsUpdate -Install -AcceptAll -AutoReboot
-		#Write Reg Key to mark success
-		$name = "Install All Available Updates"
-		$date = Get-Date
-		$value = $date.ToString()
-		WriteRegKey -name $name -type "String" -value $value
+       Get-WindowsUpdate -Install -AcceptAll -AutoReboot
+			#Write Reg Key to mark success
+			$name = "Install All Available Updates"
+			$date = Get-Date
+			$value = $date.ToString()
+			#WriteRegKey -name $name -type "String" -value $value
     } else {
-        Get-WindowsUpdate -Install -AcceptAll -IgnoreReboot
-		#Write Reg Key to mark success
-		$name = "Install All Available Updates"
-		$date = Get-Date
-		$value = $date.ToString()
-		WriteRegKey -name $name -type "String" -value $value
+      Get-WindowsUpdate -Install -AcceptAll -IgnoreReboot
+			#Write Reg Key to mark success
+			$name = "Install All Available Updates"
+			$date = Get-Date
+			$value = $date.ToString()
+			#WriteRegKey -name $name -type "String" -value $value
     }
 }
